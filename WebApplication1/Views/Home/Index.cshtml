@@ -54,6 +54,11 @@
             $("#messagesList").append(paragraph);
         });
 
+        connection.on("Notify", (message) => {
+            $("#messagesList").append(message);
+
+        })
+
         $("#sendButton").click(() => {
             var user = $("#userInput").val();
             var message = $("#messageInput").val();
