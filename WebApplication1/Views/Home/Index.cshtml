@@ -41,6 +41,7 @@
 
         var connection = new signalR.HubConnectionBuilder().withUrl("/chatHub").build();
 
+        //Start the connection
         connection.start()
             .then(() => {
                 console.log('connected');
@@ -49,6 +50,7 @@
                 console.log(err.toString());
             });
 
+        //Listen to Receive Message Event
         connection.on("ReceiveMessage", (user, message) => {
             var paragraph = `<p>${user} :  ${message}</p>`;
             $("#messagesList").append(paragraph);
@@ -68,6 +70,7 @@
                 return;
             }
 
+            //Invoke Hub Method from js client
             connection.invoke("SendMessage", user, message)
                 .catch((err) => {
                     return console.log(err.toString());
